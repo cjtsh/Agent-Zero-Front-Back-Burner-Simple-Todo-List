@@ -1,0 +1,20 @@
+<button 
+    class="config-button" 
+    id="burner-button" 
+    @click="openModal('/plugins/front_back_burner/webui/burner_modal.html')" 
+    x-move-after=".config-button#dashboard"
+    style="
+        background: linear-gradient(135deg, rgba(255, 99, 71, 0.2), rgba(68, 160, 255, 0.2));
+        border-left: 3px solid #ff6347;
+        border-right: 3px solid #44a0ff;
+        padding-left: 10px;
+        padding-right: 10px;
+    ">
+    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <i class="fas fa-fire" style="color: #ff6347; font-size: 1.1em;"></i>
+            <span style="font-weight: 600;">Front & Back Burner</span>
+        </div>
+        <i class="fas fa-snowflake" style="color: #44a0ff; font-size: 1.1em;"></i>
+    </div>
+</button>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front & Back Burner</title>
+    <script type="module" src="/plugins/front_back_burner/webui/burner_store.js"></script>
+</head>
+<body>
+    <div x-data>
+        <template x-if="$store.burnerStore">
+            <div x-init="$store.burnerStore.onOpen()" x-destroy="$store.burnerStore.cleanup()" class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Front Burner -->
+                    <div class="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
+                        <h2 class="text-xl font-bold text-red-400 mb-4 flex items-center gap-2">
+                            <i class="fas fa-fire"></i> Front Burner
+                        </h2>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <input type="text" x-model="$store.burnerStore.newFrontText" @keydown.enter="$store.burnerStore.addFront()" placeholder="Add active task..." class="flex-1 bg-gray-800 text-white rounded p-2 border border-gray-700">
+                            <button @click="$store.burnerStore.addFront()" class="bg-red-500 hover:bg-red-600 text-white rounded p-2 px-4">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+
+                        <ul class="space-y-2">
+                            <template x-for="(item, index) in $store.burnerStore.items.front" :key="index">
+                                <li class="bg-gray-800/50 rounded p-3 flex items-center justify-between text-gray-200 border-l-4 border-red-500">
+                                    <span x-text="item"></span>
+                                    <div class="flex gap-2">
+                                        <button @click="$store.burnerStore.moveToBack(index)" title="Move to Back Burner" class="text-blue-400 hover:text-blue-300">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </button>
+                                        <button @click="$store.burnerStore.removeFront(index)" title="Delete" class="text-red-400 hover:text-red-300">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                            </template>
+                            <li x-show="$store.burnerStore.items.front.length === 0" class="text-gray-500 italic text-center py-4">Nothing cooking yet.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Back Burner -->
+                    <div class="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
+                        <h2 class="text-xl font-bold text-blue-400 mb-4 flex items-center gap-2">
+                            <i class="fas fa-snowflake"></i> Back Burner
+                        </h2>
+
+                        <div class="flex gap-2 mb-4">
+                            <input type="text" x-model="$store.burnerStore.newBackText" @keydown.enter="$store.burnerStore.addBack()" placeholder="Park an idea..." class="flex-1 bg-gray-800 text-white rounded p-2 border border-gray-700">
+                            <button @click="$store.burnerStore.addBack()" class="bg-blue-500 hover:bg-blue-600 text-white rounded p-2 px-4">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+
+                        <ul class="space-y-2">
+                            <template x-for="(item, index) in $store.burnerStore.items.back" :key="index">
+                                <li class="bg-gray-800/50 rounded p-3 flex items-center justify-between text-gray-200 border-l-4 border-blue-500">
+                                    <span x-text="item"></span>
+                                    <div class="flex gap-2">
+                                        <button @click="$store.burnerStore.moveToFront(index)" title="Move to Front Burner" class="text-red-400 hover:text-red-300">
+                                            <i class="fas fa-arrow-left"></i>
+                                        </button>
+                                        <button @click="$store.burnerStore.removeBack(index)" title="Delete" class="text-blue-400 hover:text-blue-300">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                            </template>
+                            <li x-show="$store.burnerStore.items.back.length === 0" class="text-gray-500 italic text-center py-4">No parked ideas.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</body>
+</html>
