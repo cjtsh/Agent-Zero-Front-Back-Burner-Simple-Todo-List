@@ -13,3 +13,8 @@ Keep active tasks on the **Front Burner** 🔥 and parked ideas for later on the
 1. Install via the Agent Zero Plugin Hub or manually place this folder in `/a0/usr/plugins/`.
 2. Restart Agent Zero.
 3. Click the new "Front & Back Burner" button in your sidebar!
+
+
+## Legal notice
+
+This plugin is provided under the [MIT License](LICENSE). Review the [disclaimer](DISCLAIMER.md) before installing it into Agent Zero, including its local file access and generated-code risks.
